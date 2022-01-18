@@ -38,10 +38,9 @@ const getRecommendGroups = (arr) => {
 };
 
 const getMaxItem = (arr) => {
-    const sortedItems = arr.sort((a, b) => a.length - b.length);
-    const lastElementIdx = sortedItems.length - 1;
-
-    return sortedItems[lastElementIdx];
+    const sortedItems = arr.sort((a, b) => b.length - a.length);
+    const firstItemIndex = 0;
+    return sortedItems[firstItemIndex];
 };
 
 const maxItemAssociation = (usersBuyingList) => {
