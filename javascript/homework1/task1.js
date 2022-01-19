@@ -38,7 +38,9 @@ const getRecommendGroups = (arr) => {
 };
 
 const getMaxItem = (arr) => {
-    const sortedItems = arr.sort((a, b) => b.length - a.length);
+    const sortedItems = arr.sort((a, b) => 
+        a.toLocaleString().localeCompare(b.toLocaleString())
+    );
     const firstItemIndex = 0;
     return sortedItems[firstItemIndex];
 };
@@ -47,5 +49,5 @@ const maxItemAssociation = (usersBuyingList) => {
     const recommendGroups = getRecommendGroups(usersBuyingList);
     const maxItem = getMaxItem(recommendGroups);
 
-    return maxItem.sort();
+    return [...maxItem].sort();
 };

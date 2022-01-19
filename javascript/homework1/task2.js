@@ -2,13 +2,17 @@
 
 // Задание 2.
 
+let result = 0;
+
 const sum = (arg) => {
     if (typeof arg === 'number') {
-        this.result = (this.result || 0) + arg;
+        result = result + arg;
+        
         return sum; 
     }
 
-    const res = this.result;
-    this.result = 0;
+    const res = result;
+    result = 0;
+
     return res; 
 };
