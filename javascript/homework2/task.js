@@ -23,4 +23,4 @@ function promiseReduce(asyncFunctions, reduce, initialValue) {
             )
         )
     ), Promise.resolve(initialValue));
-}
+};
