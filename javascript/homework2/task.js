@@ -1,3 +1,5 @@
+// first way to solve
+
 function promiseReduce(asyncFunctions, reduce, initialValue) { 
     return new Promise((resolve) => {
         return asyncFunctions[0]()
@@ -9,3 +11,16 @@ function promiseReduce(asyncFunctions, reduce, initialValue) {
             .then(resolve);
     });
 };
+
+
+// second way to solve
+
+function promiseReduce(asyncFunctions, reduce, initialValue) {
+    return asyncFunctions.reduce((acc, fn) => (
+        acc.then((acc) => 
+            fn().then((res) => 
+                reduce(acc, res)
+            )
+        )
+    ), Promise.resolve(initialValue));
+}
