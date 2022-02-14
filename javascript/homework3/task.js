@@ -1,4 +1,4 @@
-const getSelectorWithPseudoClass = (selector, index, maxIndex) => {
+const getPseudoClass = (index, maxIndex) => {
     let pseudoClass;
 
     if (index === 0) {
@@ -9,105 +9,85 @@ const getSelectorWithPseudoClass = (selector, index, maxIndex) => {
         pseudoClass = `:nth-of-type(${index})`;
     }
 
-    return `${selector}${pseudoClass}`;
+    return pseudoClass;
 };
 
-const getNextPath = (arr, index) => arr.slice(index, arr.length).join(' > ');
+const hasId = (selector) => selector?.indexOf('#') !== -1;
 
-const isCorrectSelector = (elem, nextPath) => {
-    const selector = nextPath ? `${elem} > ${nextPath}` : elem;
-    return !!document.querySelector(selector);
-}
-
-const preparePath = (elements, pathToElement, indexOfElement) => {
-    let preparedPath = pathToElement;
-    const numberOfElements = elements.length;
-
-    for (i = 0; i < numberOfElements; i++) {
-        const lastIndex = numberOfElements - 1;
-        const selector = getSelectorWithPseudoClass(pathToElement, i, lastIndex);
-        const nextPath = getNextPath(elements, indexOfElement + 1);
-        
-        if (isCorrectSelector(selector, nextPath)) {
-            preparedPath = selector;
-
-            break;
-        };
-    };
-
-    return preparedPath;
-};
-
-const hasId = (selector) => selector.indexOf('#') !== -1;
-
-const fixSelectors = (path) => {
-    if (!path) return null;
-
-    const elements = path.split(' > ');
-
-    return elements.reduce((acc, currentElement, index) => {
-        if (hasId(currentElement)) {
-            return currentElement;
-        }
-
-        const pathToCurrentElem = acc ? `${acc} > ${currentElement}` : currentElement;
-        const similarElements = document.querySelectorAll(pathToCurrentElem);
-        const hasSeveralSimilarElements = similarElements && similarElements.length > 1;
-        const indexOfNextElement = index + 1;
-
-        return hasSeveralSimilarElements ? preparePath(elements, pathToCurrentElem, indexOfNextElement) : pathToCurrentElem;
-    }, '');
-};
-
-const getElementName = (element) => {
+const getSelector = (element) => {
     if (!element) return null;
 
     const { id, tagName, className } = element;
     const tag = tagName.toLowerCase();
     const classNames = className && className.replace(' ', '.');
+    let elementName = tag;
 
     if (id) {
         return `${tag}#${id}`;
     }
 
     if (classNames) {
-        return `${tag}.${classNames}`;
+        elementName = `${tag}.${classNames}`;
     }
 
-    return tag;
+    const selector = getAdditionalSelector(element);
+
+    return `${elementName}${selector}`;
+}; 
+
+const getAdditionalSelector = (element) => {
+    if (!element || !element.parentElement || !element.parentElement.children) {
+        return '';
+    }
+
+    const { children } = element.parentElement;
+    let index;
+    let amoutOfSimmilarElements = 0;
+    
+    for (let i = 0; i < children.length; ++i) {
+        const currentElement = children[i];
+        const { tagName, className } = currentElement;
+        
+        if (tagName === element.tagName && className === element.className) {
+            amoutOfSimmilarElements = amoutOfSimmilarElements + 1;
+        }
+
+        if (currentElement === element) {
+            index = amoutOfSimmilarElements - 1;
+        };
+    };
+
+    if (amoutOfSimmilarElements > 1) {
+        return getPseudoClass(index, amoutOfSimmilarElements);
+    }
+
+    return '';
 };
 
 const getPathByElement = (element, nextPath = '') => {
-    if (!element || !element.tagName) return null;
+    if (!element) return null;
 
-    const elementName = getElementName(element);
-    const newPath = nextPath ? `${elementName} > ${nextPath}` : elementName;
-    const parent = element.parentElement;
+    const elementSelector = getSelector(element);
+    const newPath = nextPath ? `${elementSelector} > ${nextPath}` : elementSelector;
+    const { parentElement } = element;
 
-    if (parent) {
-        return getPathByElement(parent, newPath);
+    if (!hasId(elementSelector) && parentElement) {
+        return getPathByElement(parentElement, newPath);
     }
     
     return newPath;
 };
 
-const getPath = (selector) => {
-    if (!selector) return null;
+const getPath = (element) => {
+    if (!element) return null;
 
-    const element = document.querySelector(selector);
-    const path = getPathByElement(element);
-
-    return fixSelectors(path);
+    return getPathByElement(element);
 };
 
 //exports
 
 exports.getPath = getPath;
-exports.getElementName = getElementName;
 exports.getPathByElement = getPathByElement;
-exports.getSelectorWithPseudoClass = getSelectorWithPseudoClass;
-exports.getNextPath = getNextPath;
-exports.isCorrectSelector = isCorrectSelector;
+exports.getSelector = getSelector;
 exports.hasId = hasId;
-exports.fixSelectors = fixSelectors;
-exports.preparePath = preparePath;
+exports.getPseudoClass = getPseudoClass;
