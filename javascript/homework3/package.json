@@ -1,0 +1,15 @@
+{
+    "name": "my-project",
+    "private": true,
+    "jest": {
+        "verbose": true,
+        "collectCoverage": true
+    },
+    "scripts": {
+        "test": "jest"
+    },
+    "devDependencies": {
+        "jest": "^27.4.7",
+        "jsdom": "^19.0.0"
+    }
+}
