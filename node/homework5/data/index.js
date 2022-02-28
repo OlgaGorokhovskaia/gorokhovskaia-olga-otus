@@ -8,9 +8,10 @@ const writeNewFile = async function(fileName, newFileName) {
         if (err) { 
             console.log(err);
          } else {
+            console.log('A new file creation and data writing to the file...');
             const readerStream = fs.createReadStream(fileName);
             const writerStream = fs.createWriteStream(newFileName);
-        
+
             readerStream
                 .on('data', (chunk) => {
                     const str = String(chunk);
@@ -22,7 +23,7 @@ const writeNewFile = async function(fileName, newFileName) {
                 .on('end', () => {
                     writerStream.end();
         
-                    console.log('Writing is competed.');
+                    console.log('The data writing is competed successfully.');
                 });
         };
     });  
@@ -39,11 +40,13 @@ const writeStream = async function(stream, fileName, newFileName) {
         });
     } else {
         await stream.end();
+        console.log('The file generation is completed');
         await writeNewFile(fileName, newFileName);
     }
 }
 
 const writeFile = async function(fileName, newFileName) {
+    console.log('A rundom number file generation...');
     const stream = await fs.createWriteStream(fileName);
     await writeStream(stream, fileName, newFileName);
 };
