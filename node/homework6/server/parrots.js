@@ -1,4 +1,4 @@
-const PARROTS = [{
+const fakeParrots = [{
     id: '168a4d71-eab3-4246-900f-5ff5702d5771',
     name: 'Lemon',
     age: 2,
@@ -20,16 +20,4 @@ const PARROTS = [{
     },
 }];
 
-const NEW_PARROT = {
-    id: '15ecb74c-e0d8-461b-ada8-cea3a443f88a',
-    name: 'Rick',
-    age: 1,
-    price: 50,
-    status: 'Reserved',
-    specie: {
-        name: 'Budgerigar',
-        description: `Budgies vary in size from 5 to 11 inches. Budgies can live for 10-15 years.`,
-    },
-};
-
-module.exports = { PARROTS, NEW_PARROT };
+module.exports = fakeParrots;

@@ -3,21 +3,27 @@ const { gql } = require('apollo-server');
 const typeDefs = gql`
   type Query {
     allParrots: [Parrot]!
-    parrot(id: ID!): Parrot!
+    parrot(parrotId: ID!): Parrot
   }
 
   type Mutation {
-    addNewParrot(newParrot: ParrotNewData!): [Parrot!]!
-    updateParrot(args: ParrotUpdateArgs!): Parrot!
-    deleteParrot(id: ID!): [Parrot]!
+    addNewParrot(newParrot: NewParrot!): ParrotsResponse!
+    updateParrot(args: ParrotUpdateArgs!): ParrotsResponse!
+    deleteParrot(parrotId: ID!): ParrotsResponse!
+  }
+
+  type ParrotsResponse {
+    success: Boolean!
+    message: String!
+    parrots:[Parrot]
   }
 
   input ParrotUpdateArgs {
-    id: ID!
-    newData: ParrotNewData!
+    parrotId: ID!
+    newData: NewParrot!
   }
 
-  input ParrotNewData {
+  input NewParrot {
     "The parrot's name"
     name: String
     "The parrot's age (years))"
@@ -26,6 +32,13 @@ const typeDefs = gql`
     price: Float
     status: Status
     specie: SpecieInput
+  }
+
+  input SpecieInput {
+    "The specie's name"
+    name: SpecieName
+    "The description of size and life expectancy"
+    description: String
   }
     
   type Parrot {

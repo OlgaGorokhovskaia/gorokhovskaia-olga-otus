@@ -27,12 +27,12 @@ query AllParrots {
 ### Example query to get the parrot by ID: 
 ```
 query Parrot($parrotId: ID!) {
-  parrot(id: $parrotId) {
+  parrot(parrotId: $parrotId) {
     id
     name
     age
-    price
     status
+    price
     specie {
       name
       description
@@ -43,22 +43,26 @@ query Parrot($parrotId: ID!) {
 Variables:
 ```
 {
-  "parrotId": "168a4d71-eab3-4246-900f-5ff5702d5771"
+  "parrotId": "1e202cb5-c374-4146-9605-704a78490ca8"
 }
 ```
 
 ### Example mutation to add a new parrot: 
 ```
-mutation AddNewParrot($newParrot: ParrotNewData!) {
+mutation AddNewParrot($newParrot: NewParrot!) {
   addNewParrot(newParrot: $newParrot) {
-    id
-    name
-    age
-    price
-    status
-    specie {
+    success
+    message
+    parrots {
+      id
       name
-      description
+      age
+      price
+      status
+      specie {
+        name
+        description
+      }
     }
   }
 }
@@ -67,6 +71,44 @@ Variables:
 ```
 {
   "newParrot": {
+    "name": "Rick",
+    "age": 1,
+    "price": 50,
+    "status": "Reserved",
+    "specie": {
+        "name": "Budgerigar",
+        "description": "Budgies vary in size from 5 to 11 inches. Budgies can live for 10-15 years."
+    }
+  }
+}
+```
+
+### Example mutation to change the parrot by ID: 
+```
+ mutation UpdateParrot($args: ParrotUpdateArgs!) {
+  updateParrot(args: $args) {
+    success
+    message
+    parrots {
+      id
+      name
+      age
+      price
+      status
+      specie {
+        name
+        description
+      }
+    }
+  }
+}
+```
+Variables:
+```
+{
+  "args": {
+    "parrotId": "1e202cb5-c374-4146-9605-704a78490ca8",
+    "newData": {
       "name": "Rick",
       "age": 1,
       "price": 50,
@@ -76,54 +118,25 @@ Variables:
         "description": "Budgies vary in size from 5 to 11 inches. Budgies can live for 10-15 years."
       }
     }
-}
-```
-
-### Example mutation to change the parrot by ID: 
-```
-mutation UpdateParrot($args: ParrotUpdateArgs!) {
-  updateParrot(args: $args) {
-    id
-    name
-    age
-    price
-    status
-    specie {
-      name
-      description
-    }
-  }
-}
-```
-Variables:
-```
-{
-  "args": {
-    "id": "15ecb74c-e0d8-461b-ada8-cea3a443f88a",
-    "newData": {
-      "name": "Rick",
-      "age": 1,
-      "price": 50,
-      "status": "Reserved",
-      "specie": {
-        "name": "Budgerigar",
-        "description": "Budgies vary in size from 5 to 11 inches. Budgies can live for 10-15 years."
-    }
   }
 }
 ```
 ### Example mutation to delete the parrot by ID: 
 ```
-mutation DeleteParrot($deleteParrotId: ID!) {
-  deleteParrot(id: $deleteParrotId) {
-    id
-    name
-    age
-    price
-    status
-    specie {
+mutation DeleteParrot($parrotId: ID!) {
+  deleteParrot(parrotId: $parrotId) {
+    success
+    message
+    parrots {
+      id
       name
-      description
+      age
+      price
+      status
+      specie {
+        name
+        description
+      }
     }
   }
 }
@@ -131,6 +144,6 @@ mutation DeleteParrot($deleteParrotId: ID!) {
 Variables:
 ```
 {
-    "deleteParrotId": "15ecb74c-e0d8-461b-ada8-cea3a443f88a",
+  "parrotId": "1e202cb5-c374-4146-9605-704a78490ca8"
 }
 ```
