@@ -2,23 +2,19 @@ import plusImage from './img/plus.png';
 import minusImage from './img/minus.png';
 
 class MyLeaf extends HTMLElement {
+    static observedAttributes = ["icon"];
+
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
 
-        this.listItems = JSON.parse(this.items);
-        this.toggleListItem = this.toggleListItem.bind(this);
+        this.wrapper = document.createElement('div');
     }
 
     connectedCallback() {
-        const div = document.createElement('div');
+        this.wrapper.setAttribute('icon', this.getIcon);
 
-        if (this.listItems.length > 0) {
-            div.setAttribute('isOpen', false);
-            div.addEventListener('click', this.toggleListItem, false);
-        }
-
-        div.innerHTML = `<style>
+        this.wrapper.innerHTML = `<style>
             div {
                 display: inline-block;
                 border-bottom: 2px solid;
@@ -28,7 +24,7 @@ class MyLeaf extends HTMLElement {
                 line-height: 3;
             }
             
-            div[isOpen]:hover {
+            div[icon]:hover {
                 cursor: pointer;
                 color: #8a2be2;
                 border-color: #000;
@@ -43,66 +39,34 @@ class MyLeaf extends HTMLElement {
                 top: calc(50% - 18px/2);
             }
             
-            div[isOpen$="true"]::before {
+            div[icon$="isOpen"]::before {
                 background-image: url(${minusImage});
                 background-size: contain;
             }
             
-            div[isOpen$="false"]::before {
+            div[icon$="isClosed"]::before {
                 background-image: url(${plusImage});
                 background-size: contain;
             }
-
-            div > img {
-                position: absolute;
-                height: 18px;
-                width: 18px;
-                left: 20;
-            }
         </style>
-        Element ${this.id}`;
-        this.shadowRoot.appendChild(div);
+        Element ${this.id}
+        `;
+        this.shadowRoot.appendChild(this.wrapper);
     }
 
-    get items() {
-        const items = [];
+    get getIcon() {
         const attributes = [...this.attributes];
+        const icon = attributes.find((attr) => attr.name.includes('icon'));
 
-        attributes.forEach((attr) => {
-            if (attr.name.includes('items')) {
-                items.push(attr.value);
-            }
-        });
-
-        return items;
+        return icon ? icon.value : null;
     }
 
-    toggleListItem = (e) => {
-        const isOpen = e.target.getAttribute('isOpen');
-        console.log(isOpen);
-        if (isOpen === 'true') {
-            e.target.nextSibling.remove();
-            e.target.setAttribute('isOpen', 'false');
-        } else if (isOpen === 'false') {
-            const ul = document.createElement('ul');
-
-            this.listItems.forEach(({ id, items }) => {
-                const li = document.createElement('li');
-                li.innerHTML = `<style>
-                    ul {
-                        padding: 0 0 0;
-                        list-style: none;
-                        margin: 0 0 0 60px;
-                    }
-                </style>
-                <my-leaf id=${id} items=${JSON.stringify(items || [])}></my-leaf>`;
-                ul.appendChild(li);
-            });
-
-            this.shadowRoot.appendChild(ul);
-            e.target.setAttribute('isOpen', 'true');
+    attributeChangedCallback(name, _, newValue) {
+        if (name === 'icon') {
+            this.wrapper.setAttribute(name, newValue);
         }
     }
+
 }
 
 window.customElements.define('my-leaf', MyLeaf);

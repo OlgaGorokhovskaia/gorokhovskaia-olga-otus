@@ -2,12 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: '.',
+    entry: __dirname,
     mode: 'development',
     devServer: {
-        static: {
-            directory: path.join(__dirname, 'public'),
-        },
         port: 8000,
     },
     module: {
