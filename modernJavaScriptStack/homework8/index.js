@@ -1,11 +1,7 @@
-import style from './src/style.css';
-
-import * as musics from '@Musics';
-import * as icons from '@Icons';
-
 import { songs } from './src/data';
 import { app } from './src/app';
-
+import * as icons from '@Icons';
+import style from './src/style.css';
 
 function component() {
     const link = document.createElement('link');
@@ -18,10 +14,10 @@ function component() {
     title.innerText = 'Music Player';
 
 
-    // add audio
+    // // add audio
     const audio = document.createElement('audio');
     audio.id = "audio-source";
-    audio.src = musics.song1;
+    audio.src = songs[0].path;
 
     document.body.appendChild(audio);
 
@@ -78,7 +74,7 @@ function component() {
 
     // add music player
     const secondSection = document.createElement('section');
-    secondSection.className = "music-player-section active";
+    secondSection.className = "music-player-section";
 
     const backIcon = document.createElement('img');
     backIcon.src = icons.backIcon;
@@ -137,7 +133,7 @@ function component() {
     section.appendChild(secondSection);
 
     const playlist = document.createElement('section');
-    playlist.className = "playlist active";
+    playlist.className = "playlist";
 
 
     const backButton = document.createElement('img');
@@ -152,7 +148,7 @@ function component() {
 
     for (let i = 0; i < songs.length; i++) {
         const queue = document.createElement('div');
-        queue.className = i === 0 ? "queue active" : "queue";
+        queue.className = "queue";
         queue.innerHTML = `
                     <div class="queue-cover">
                         <img src=${songs[i].cover} alt="">

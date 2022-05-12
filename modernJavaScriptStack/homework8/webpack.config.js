@@ -32,7 +32,7 @@ module.exports = {
                 outputPath: 'images',
             },
         }, {
-            test: /\.(mp3)$/i,
+            test: /\.(wav)$/i,
             loader: 'file-loader',
             options: {
                 publicPath: 'musics',

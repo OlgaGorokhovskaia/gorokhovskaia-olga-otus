@@ -2,36 +2,36 @@ import * as musics from '@Musics';
 import * as covers from '@Covers';
 
 export const songs = [{
-        name: 'song 1',
+        name: 'Dog barking',
         path: musics.song1,
         artist: 'artist 1',
         cover: covers.cover1,
     },
     {
-        name: 'song 2',
+        name: 'Geese',
         path: musics.song2,
         artist: 'artist 2',
         cover: covers.cover2,
     }, {
-        name: 'song 3',
+        name: 'Keyboard typing',
         path: musics.song3,
         artist: 'artist 3',
         cover: covers.cover3,
     },
     {
-        name: 'song 4',
+        name: 'Rain',
         path: musics.song4,
         artist: 'artist 4',
         cover: covers.cover4,
     }, {
-        name: 'song 5',
-        path: musics.song1,
+        name: 'Timer',
+        path: musics.song5,
         artist: 'artist 5',
         cover: covers.cover5,
     },
     {
-        name: 'song 6',
-        path: musics.song3,
+        name: 'Trumpet fanfare',
+        path: musics.song6,
         artist: 'artist 6',
         cover: covers.cover6,
     },
