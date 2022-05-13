@@ -11,6 +11,7 @@
     --text-color: #fff;
     --primary-color: #ff6363;
     --secondary-color: #000;
+    --grey-color: #555;
     --alpha-color: rgba(0, 0, 0, 0.5);
     --shadow: 0 15px 40px var(--alpha-color);
 }
@@ -118,7 +119,7 @@ body {
 
 .music-player-section {
     width: 100%;
-    height: 100px;
+    height: 130px;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -133,8 +134,12 @@ body {
     position: absolute;
     top: -4px;
     height: 8px;
-    background: var(--secondary-color);
+    background: var(--grey-color);
     overflow: hidden;
+}
+
+.music-seek-bar:hover {
+    cursor: pointer;
 }
 
 .music-seek-bar::-webkit-slider-thumb {
@@ -150,7 +155,7 @@ body {
     font-weight: 300;
     font-size: 20px;
     text-align: center;
-    margin-top: 5px;
+    margin-top: 10px;
     text-transform: capitalize;
 }
 
@@ -168,7 +173,6 @@ body {
 .controls span {
     display: none;
     opacity: 0;
-    transition: 1s;
 }
 
 .music-player-section.active .controls {
@@ -179,6 +183,11 @@ body {
     font-size: 25px;
     display: block;
     opacity: 0.5;
+    width: 60px;
+    height: 34px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .music-player-section.active .controls span.active {
