@@ -7,7 +7,6 @@ export interface ISong {
     artist: string;
     cover: string;
 };
-
 export const songs: ISong[] = [{
         name: 'Dog barking',
         path: musics.song1,
