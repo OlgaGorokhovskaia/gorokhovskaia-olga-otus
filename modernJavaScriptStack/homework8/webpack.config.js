@@ -8,6 +8,7 @@ module.exports = {
         port: 8000,
     },
     resolve: {
+        extensions: ['.ts', '.js'],
         alias: {
             '@Covers': path.resolve(__dirname, 'src/assets/images/covers'),
             '@Icons': path.resolve(__dirname, 'src/assets/images/icons'),
@@ -16,6 +17,10 @@ module.exports = {
     },
     module: {
         rules: [{
+            test: /\.tsx?$/,
+            use: 'ts-loader',
+            exclude: /node_modules/,
+        }, {
             test: /\.html$/i,
             loader: "html-loader",
             options: {

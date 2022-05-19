@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "paths": {
+        "@Covers": ["./src/assets/images/covers"],
+        "@Icons": ["./src/assets/images/icons"],
+        "@Musics": ["./src/assets/musics"]
+      },
+      "types": [
+        "node"
+      ],
+    },
+    "include": ["src/assets", "src/declarations.d.ts"],
+}

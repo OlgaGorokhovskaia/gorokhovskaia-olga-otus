@@ -1,7 +1,14 @@
 import * as musics from '@Musics';
 import * as covers from '@Covers';
 
-export const songs = [{
+export interface ISong {
+    name: string;
+    path: string;
+    artist: string;
+    cover: string;
+};
+
+export const songs: ISong[] = [{
         name: 'Dog barking',
         path: musics.song1,
         artist: 'artist 1',
@@ -35,4 +42,4 @@ export const songs = [{
         artist: 'artist 6',
         cover: covers.cover6,
     },
-]
+];

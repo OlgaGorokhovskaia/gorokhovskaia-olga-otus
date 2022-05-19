@@ -1,5 +1,17 @@
-export class ControlButton {
-    constructor(parent, classNames, icon, onClick) {
+interface IControlButton {
+    classNames: string;
+    icon: string;
+    onClick?: (e?: Event) => void;
+    parent?: HTMLElement;
+};
+
+export class ControlButton implements IControlButton {
+    classNames: string;
+    icon: string;
+    onClick?: (e?: Event) => void;
+    parent?: HTMLElement;
+
+    constructor(classNames: string, icon: string, onClick?: (e?: Event) => void, parent?: HTMLElement) {
         this.parent = parent || document.body;
         this.classNames = classNames || "";
         this.icon = icon || "";
@@ -8,7 +20,7 @@ export class ControlButton {
         this.init();
     };
 
-    init() {
+    init(): void {
         const icon = document.createElement('i');
         icon.className = this.classNames;
         icon.setAttribute('style', `background-image: url(${this.icon});`);
