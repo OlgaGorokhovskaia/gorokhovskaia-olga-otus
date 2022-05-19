@@ -5,7 +5,7 @@ interface IVolumeSlider {
 };
 
 export class VolumeSlider implements IVolumeSlider {
-    parent?: HTMLElement;
+    parent: HTMLElement;
 
     constructor(parent: HTMLElement) {
         this.parent = parent || document.body;
@@ -36,8 +36,8 @@ export class VolumeSlider implements IVolumeSlider {
         });
 
         volumeSlider.addEventListener('input', () => {
-            const music: HTMLMediaElement = document.querySelector('#audio-source');
-            music.volume = Number(volumeSlider.value);
+            const music: HTMLMediaElement | null = document.querySelector('#audio-source');
+            if (music) music.volume = Number(volumeSlider.value);
         });
 
         volumeBtn.addEventListener('click', () => {

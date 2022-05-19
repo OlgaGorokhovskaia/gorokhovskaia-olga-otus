@@ -14,7 +14,7 @@ interface IMusicPlayer {
 export class MusicPlayer implements IMusicPlayer {
     songs: ISong[];
     song: ISong;
-    parent?: HTMLElement;
+    parent: HTMLElement;
     
     constructor(songs: ISong[], song: ISong, parent?: HTMLElement) {
         this.parent = parent || document.body;
@@ -66,12 +66,12 @@ export class MusicPlayer implements IMusicPlayer {
         navIcon.src = icons.navIcon;
         navIcon.className = 'nav-btn icon hide';
 
-        navIcon.addEventListener('click', (e) => {
+        navIcon.addEventListener('click', (e: Event) => {
             e.preventDefault();
             e.stopPropagation();
 
-            const playlistSection: HTMLElement = document.querySelector('.playlist');
-            playlistSection.classList.add('active');
+            const playlistSection: HTMLElement | null = document.querySelector('.playlist');
+            playlistSection?.classList.add('active');
         });
 
         section.appendChild(navIcon);

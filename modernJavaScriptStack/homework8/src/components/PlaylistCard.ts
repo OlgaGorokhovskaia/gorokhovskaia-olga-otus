@@ -8,7 +8,7 @@ interface IPlaylistCard {
 
 export class PlaylistCard implements IPlaylistCard {
     song: ISong;
-    parent?: HTMLElement;
+    parent: HTMLElement;
     
     constructor(song: ISong, parent?: HTMLElement) {
         this.parent = parent || document.body;

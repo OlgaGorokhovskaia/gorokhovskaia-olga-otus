@@ -9,7 +9,7 @@ interface ISeekBar {
 
 export class SeekBar implements ISeekBar {
     songs: ISong[];
-    parent?: HTMLElement;
+    parent: HTMLElement;
     
     constructor(songs: ISong[], parent?: HTMLElement) {
         this.parent = parent || document.body;
@@ -30,8 +30,8 @@ export class SeekBar implements ISeekBar {
     };
 
     setCurrentTime = (elem: HTMLInputElement): void => {
-        const music: HTMLAudioElement = document.querySelector('#audio-source');
-        music.currentTime = Number(elem.value);
+        const music: HTMLAudioElement | null = document.querySelector('#audio-source');
+        if (music) music.currentTime = Number(elem.value);
     };
 
     createMusicSeekBar = (parent: HTMLElement): void => {
@@ -40,7 +40,7 @@ export class SeekBar implements ISeekBar {
         musicSeekBar.setAttribute('type', 'range');
         musicSeekBar.setAttribute('value', '0');
         musicSeekBar.setAttribute('min', '0');
-        musicSeekBar.setAttribute('max', null);
+        musicSeekBar.setAttribute('max', 'null');
 
         musicSeekBar.addEventListener('change', (e: Event) => {
             this.setCurrentTime(e.target as HTMLInputElement);
@@ -49,15 +49,15 @@ export class SeekBar implements ISeekBar {
         parent.appendChild(musicSeekBar);
 
         setInterval(() => {
-            const music: HTMLAudioElement = document.querySelector('#audio-source');
-            const currentMusicTime = document.querySelector('.current-time');
+            const music: HTMLAudioElement | null = document.querySelector('#audio-source');
+            const currentMusicTime: HTMLInputElement | null = document.querySelector('.current-time');
 
-            musicSeekBar.value = String(music.currentTime);
-            currentMusicTime.innerHTML = formatTime(music.currentTime);
+            musicSeekBar.value = String(music?.currentTime);
+            if (currentMusicTime && music) currentMusicTime.innerHTML = formatTime(music.currentTime);
 
-            if (Math.floor(music.currentTime) == Math.floor(+musicSeekBar.max)) {
-                const repeatBtn: HTMLElement = document.querySelector('span.fa-redo');
-                const isActiveRepeatBtn: boolean = repeatBtn.classList.contains('active');
+            if (music && Math.floor(music.currentTime) == Math.floor(+musicSeekBar.max)) {
+                const repeatBtn: HTMLElement | null  = document.querySelector('span.fa-redo');
+                const isActiveRepeatBtn: boolean = !!repeatBtn && repeatBtn.classList.contains('active');
 
                 if (isActiveRepeatBtn) {
                     const queue: NodeListOf<Element> = document.querySelectorAll('.queue');
@@ -72,11 +72,11 @@ export class SeekBar implements ISeekBar {
 
                     setMusic(currentMusic, this.songs);
 
-                    const playBtn: HTMLElement = document.querySelector('i.fa-play');
-                    playBtn.click();
+                    const playBtn: HTMLElement | null = document.querySelector('i.fa-play');
+                    if (playBtn) playBtn.click();
                 } else {
-                    const forwardBtn: HTMLElement = document.querySelector('i.fa-forward');
-                    forwardBtn.click();
+                    const forwardBtn: HTMLElement | null = document.querySelector('i.fa-forward');
+                    if (forwardBtn) forwardBtn.click();
                 }
             }
         }, 500);

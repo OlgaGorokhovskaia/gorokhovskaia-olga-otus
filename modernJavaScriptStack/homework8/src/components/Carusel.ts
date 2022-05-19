@@ -7,7 +7,7 @@ interface ICarusel {
 
 export class Carusel implements ICarusel {
     songs: ISong[];
-    parent?: HTMLElement;
+    parent: HTMLElement;
 
     constructor(songs: ISong[], parent?: HTMLElement) {
         this.parent = parent || document.body;

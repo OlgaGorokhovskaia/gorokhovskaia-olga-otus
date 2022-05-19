@@ -10,9 +10,14 @@ interface IControls {
     parent?: HTMLElement;
 };
 
+enum ButtonClasses {
+    Pause = 'fa-pause',
+    Play = 'fa-play'
+};
+
 export class Controls implements IControls {
     songs: ISong[];
-    parent?: HTMLElement;
+    parent: HTMLElement;
 
     constructor(songs: ISong[], parent?: HTMLElement) {
         this.parent = parent || document.body;
@@ -33,7 +38,7 @@ export class Controls implements IControls {
         this.parent.appendChild(controls);
     };
 
-    toggleActiveClass = (elem: HTMLElement): void => { elem.classList.toggle('active'); };
+    toggleActiveClass = (elem: HTMLElement): void => { elem?.classList.toggle('active'); };
 
     createRepeatBtn = (parent: HTMLElement): void => {
         const repeatBtn: HTMLSpanElement = document.createElement('span');
@@ -49,7 +54,6 @@ export class Controls implements IControls {
 
         parent.appendChild(repeatBtn);
     };
-
 
     backward = (): void => {
         const queue: NodeListOf<Element> = document.querySelectorAll('.queue');
@@ -69,9 +73,8 @@ export class Controls implements IControls {
 
         setMusic(currentMusic, this.songs);
 
-        const playBtn: HTMLElement = document.querySelector('i.fa-play');
-
-        playBtn.click();
+        const playBtn: HTMLElement | null = document.querySelector('i.fa-play');
+        if (playBtn) playBtn.click();
     };
 
     forward = (): void => {
@@ -92,31 +95,30 @@ export class Controls implements IControls {
 
         setMusic(currentMusic, this.songs);
 
-        const playBtn: HTMLElement = document.querySelector('i.fa-play');
-        playBtn.click();
+        const playBtn: HTMLElement | null = document.querySelector('i.fa-play');
+        if (playBtn) playBtn.click();
     };
 
     play = (e: Event): void => {
-        this.togglePlay(e, 'fa-pause');
-        this.changeIconPlaylist('fa-pause', icons.pauseIcon);
+        this.togglePlay(e.target as HTMLElement, ButtonClasses.Pause);
+        this.changeIconPlaylist(ButtonClasses.Pause, icons.pauseIcon);
     };
 
     pause = (e: Event): void => {
-        this.togglePlay(e, 'fa-play');
-        this.changeIconPlaylist('fa-play', icons.playIcon);
+        this.togglePlay(e.target as HTMLElement, ButtonClasses.Play);
+        this.changeIconPlaylist(ButtonClasses.Play, icons.playIcon);
     };
 
-    togglePlay = (e: Event, secondBtnClass: string): void => {
-        this.toggleActiveClass(e.target as HTMLElement);
+    togglePlay = (elem: HTMLElement, secondBtnClass: string): void => {
+        const secondBtn: HTMLElement | null = document.querySelector(`i.${secondBtnClass}`);
+        const music: HTMLAudioElement | null = document.querySelector('#audio-source');
 
-        const secondBtn: HTMLElement = document.querySelector(`i.${secondBtnClass}`);
-        this.toggleActiveClass(secondBtn);
+        elem.classList.remove('active');
+        if (secondBtn) secondBtn.classList.add('active');
 
-        const music: HTMLAudioElement = document.querySelector('#audio-source');
-
-        if (secondBtnClass === 'fa-pause') {
+        if (music && secondBtnClass === ButtonClasses.Pause) {
             music.play();
-        } else {
+        } else if (music) {
             music.pause();
         }
     };

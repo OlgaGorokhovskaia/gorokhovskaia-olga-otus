@@ -12,7 +12,7 @@ interface IQueque {
 export class Queque implements IQueque {
     songs: ISong[];
     index: number;
-    parent?: HTMLElement;
+    parent: HTMLElement;
     
     constructor(songs: ISong[], index: number, parent?: HTMLElement) {
         this.parent = parent || document.body;
@@ -66,16 +66,17 @@ export class Queque implements IQueque {
         if (isPlay && isActive) {
             icon.className = 'fas fa-play';
             icon.setAttribute('style', `background-image: url(${icons.playIcon});`);
-            const pauseBtn: HTMLElement = document.querySelector('i.fa-pause');
-            pauseBtn.click();
+            const pauseBtn: HTMLElement | null = document.querySelector('i.fa-pause');
+            if (pauseBtn) pauseBtn.click();
         } else {
             icon.className = 'fas fa-pause';
             icon.setAttribute('style', `background-image: url(${icons.pauseIcon});`);
 
             setMusic(this.index, this.songs);
 
-            const playBtn: HTMLElement = document.querySelector('i.fa-play');
-            playBtn.click();
+            const playBtn: HTMLElement | null = document.querySelector('i.fa-play');
+
+            if (playBtn) playBtn.click();
         }
     };
 };

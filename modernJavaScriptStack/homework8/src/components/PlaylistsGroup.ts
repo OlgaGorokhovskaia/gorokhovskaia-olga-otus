@@ -9,8 +9,8 @@ interface IPlaylistsGroup {
 
 export class PlaylistsGroup implements IPlaylistsGroup {
     songs: ISong[];
-    title?: string;
-    parent?: HTMLElement;
+    title: string;
+    parent: HTMLElement;
     
     constructor(songs: ISong[], title?: string, parent?: HTMLElement) {
         this.parent = parent || document.body;

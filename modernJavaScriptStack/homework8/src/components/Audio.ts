@@ -7,7 +7,7 @@ interface IAudio {
 
 export class Audio implements IAudio {
     song: ISong;
-    parent?: HTMLElement;
+    parent: HTMLElement;
     
     constructor(song: ISong, parent?: HTMLElement) {
         this.song = song;

@@ -10,7 +10,7 @@ interface IPlaylist {
 
 export class Playlist implements IPlaylist {
     songs: ISong[];
-    parent?: HTMLElement;
+    parent: HTMLElement;
     
     constructor(songs: ISong[], parent?: HTMLElement) {
         this.parent = parent || document.body;

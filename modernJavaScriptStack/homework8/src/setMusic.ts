@@ -2,30 +2,30 @@ import { formatTime } from './utils';
 import { ISong } from './data';
 
 export const setMusic = (i: number, songs: ISong[]): void => {
-    const seekBar: HTMLInputElement = document.querySelector('.music-seek-bar');
-    const music: HTMLMediaElement = document.querySelector('#audio-source');
-    const songName: HTMLElement = document.querySelector('.current-song-name');
-    const artistName: HTMLElement = document.querySelector('.artist-name');
-    const coverImage: HTMLImageElement = document.querySelector('.cover');
+    const seekBar: HTMLInputElement | null = document.querySelector('.music-seek-bar');
+    const music: HTMLMediaElement | null = document.querySelector('#audio-source');
+    const songName: HTMLElement | null = document.querySelector('.current-song-name');
+    const artistName: HTMLElement | null = document.querySelector('.artist-name');
+    const coverImage: HTMLImageElement | null = document.querySelector('.cover');
 
-    seekBar.value = '0';
+    if (seekBar) seekBar.value = '0';
     let song = songs[i];
 
-    music.src = song.path;
+    if (music) music.src = song.path;
 
-    songName.innerHTML = song.name;
-    artistName.innerHTML = song.artist;
-    coverImage.src = song.cover;
+    if (songName) songName.innerHTML = song.name;
+    if (artistName) artistName.innerHTML = song.artist;
+    if (coverImage) coverImage.src = song.cover;
 
     setTimeout(() => {
-        seekBar.max = String(music.duration);
+        if (seekBar && music) seekBar.max = String(music.duration);
 
-        const musicDuration: HTMLElement = document.querySelector('.duration');
-        musicDuration.innerHTML = formatTime(music.duration);
+        const musicDuration: HTMLElement | null = document.querySelector('.duration');
+        if (musicDuration && music) musicDuration.innerHTML = formatTime(music.duration);
     }, 300);
 
-    const currentMusicTime: HTMLElement = document.querySelector('.current-time');
-    currentMusicTime.innerHTML = '00 : 00';
+    const currentMusicTime: HTMLElement | null = document.querySelector('.current-time');
+    if (currentMusicTime) currentMusicTime.innerHTML = '00 : 00';
 
     const queue: NodeListOf<Element> = document.querySelectorAll('.queue');
     queue.forEach((item) => { item.classList.remove('active') });

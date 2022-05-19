@@ -1,21 +1,21 @@
 interface IControlButton {
     classNames: string;
     icon: string;
-    onClick?: (e?: Event) => void;
+    onClick?: (e: Event) => void;
     parent?: HTMLElement;
 };
 
 export class ControlButton implements IControlButton {
     classNames: string;
     icon: string;
-    onClick?: (e?: Event) => void;
-    parent?: HTMLElement;
+    onClick?: (e: Event) => void;
+    parent: HTMLElement;
 
-    constructor(classNames: string, icon: string, onClick?: (e?: Event) => void, parent?: HTMLElement) {
+    constructor(classNames: string, icon: string, onClick?: (e: Event) => void, parent?: HTMLElement) {
         this.parent = parent || document.body;
         this.classNames = classNames || "";
         this.icon = icon || "";
-        this.onClick = onClick || null;
+        this.onClick = onClick;
 
         this.init();
     };
