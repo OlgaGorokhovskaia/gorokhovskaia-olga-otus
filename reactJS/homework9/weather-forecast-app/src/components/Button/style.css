@@ -1,0 +1,50 @@
+:root {
+  --size: 16px;
+}
+
+.btn {
+    background: none;
+    border: none;
+    font-size: var(--size);
+    line-height: 1;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    color: #e7e7e7;
+  }
+  
+  .addBtn, .backBtn {
+    position: relative;
+    padding-left: calc(var(--size) + 4px);
+  }
+  
+  .addBtn::before,
+  .backBtn::before {
+    content: '';
+    height: var(--size);
+    width: var(--size);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  
+  .addBtn::before {
+    background-image: url(../../images/icons/plus-white.svg);
+  }
+  
+  .addBtn:hover::before {
+    background-image: url(../../images/icons/plus-lightGrey.svg);
+  }
+  
+  .backBtn::before {
+    background-image: url(../../images/icons/back-arrow-white.svg);
+  }
+  
+  .backBtn:hover::before {
+    background-image: url(../../images/icons/back-arrow-lightGrey.svg);
+  }

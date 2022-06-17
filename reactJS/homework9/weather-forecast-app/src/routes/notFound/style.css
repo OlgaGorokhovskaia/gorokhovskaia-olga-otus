@@ -1,0 +1,14 @@
+
+.notFound {
+    text-align: center;
+  }
+  
+.notFound > h1 {
+    font-size: 100px;
+    margin-bottom: 80px;
+    font-family: sans-serif;
+    font-weight: bold;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: url(../../images/backgrounds/space.jpeg);
+}

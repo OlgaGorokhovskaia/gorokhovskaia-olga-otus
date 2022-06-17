@@ -1,0 +1,189 @@
+:root {
+  --text-shadow: 2px 0px #444444;;
+}
+
+.carousel {
+    margin-bottom: 40px;
+}
+
+.carousel .title {
+    font-size: 24px;
+    margin: 0 0 10px;
+}
+  
+.carousel .container {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  padding-bottom: 4px;
+}
+
+.carousel .container::-webkit-scrollbar {
+  width: 1em;
+  height: 6px;
+}
+ 
+.carousel .container::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+.carousel .container::-webkit-scrollbar-thumb {
+  border-radius: 1px;
+  background-color: #97aaba;
+}
+
+  .wrapperHour {
+    display: inline-block;
+    text-align: center;
+    margin: 0 6px;
+  }
+  
+  .wrapperHour:first-of-type {
+    margin-left: 0;
+  }
+  
+  .wrapperHour:last-of-type {
+    margin-right: 0;
+  }
+  
+  .wrapperWeather {
+    width: 110px;
+    height: 130px;
+    padding: 18px 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; 
+  }
+  
+ .wrapperHour .time {
+    font-size: 14px;
+    margin: 0 0 10px;
+  }
+  
+  .wrapperWeather .temperature {
+    font-size: 24px;
+    margin: 0 0 4px;
+    text-shadow: var(--text-shadow);
+  }
+  
+  .wrapperWeather .describe {
+    font-size: 16px;
+    margin: 0;
+    padding: 10px 0;
+    background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
+    text-shadow: var(--text-shadow);
+  }
+
+.clearSky {
+    background-image: url(../../images/weather/clearSky.jpeg);
+  }
+  
+  .mainlyClear {
+    background-image: url(../../images/weather/mainlyClear.jpeg);
+  }
+  
+  .partlyCloudy {
+    background-image: url(../../images/weather/partlyCloudy.jpeg);
+  }
+  
+  .overcast {
+    background-image: url(../../images/weather/overcast.jpeg);
+  }
+  
+  .fog {
+    background-image: url(../../images/weather/fog.jpeg);
+  }
+  
+  .depositingRimeFog {
+    background-image: url(../../images/weather/depositingRimeFog.jpeg);
+  }
+  
+  .lightDrizzle {
+    background-image: url(../../images/weather/lightDrizzle.jpeg);
+  }
+  
+  .moderateDrizzle {
+    background-image: url(../../images/weather/moderateDrizzle.jpeg);
+  }
+  
+  .denseDrizzle {
+    background-image: url(../../images/weather/denseDrizzle.jpeg);
+  }
+  
+  .lightFreezingDrizzle {
+    background-image: url(../../images/weather/lightFreezingDrizzle.jpeg);
+  }
+  
+  .freezingDrizzleDense {
+    background-image: url(../../images/weather/freezingDrizzleDense.jpeg);
+  }
+  
+  .slightRain {
+    background-image: url(../../images/weather/slightRain.jpeg);
+  }
+  
+  .moderateRain {
+    background-image: url(../../images/weather/moderateRain.jpeg);
+  }
+  
+  .heavyRain {
+    background-image: url(../../images/weather/heavyRain.jpeg);
+  }
+  
+  .lightFreezingRain {
+    background-image: url(../../images/weather/lightFreezingRain.jpeg);
+  }
+  
+  .heavyFreezingRain {
+    background-image: url(../../images/weather/heavyFreezingRain.jpeg);
+  }
+  
+  .slightSnowFall {
+    background-image: url(../../images/weather/slightSnowFall.jpeg);
+  }
+  
+  .moderateSnowFall {
+    background-image: url(../../images/weather/moderateSnowFall.jpeg);
+  }
+  
+  .heavySnowFall {
+    background-image: url(../../images/weather/heavySnowFall.jpeg);
+  }
+  
+  .snowGrains {
+    background-image: url(../../images/weather/snowGrains.jpeg);
+  }
+  
+  .rainShowersSlight {
+    background-image: url(../../images/weather/rainShowersSlight.jpeg);
+  }
+  
+  .rainShowersModerate {
+    background-image: url(../../images/weather/rainShowersModerate.jpeg);
+  }
+  
+  .rainShowersVolent {
+    background-image: url(../../images/weather/rainShowersVolent.jpeg);
+  }
+  
+  .snowShowersSlight {
+    background-image: url(../../images/weather/snowShowersSlight.jpeg);
+  }
+  
+  .snowShowersHeavy {
+    background-image: url(../../images/weather/snowShowersHeavy.jpeg);
+  }
+  
+  .thunderstormSlightOrModerate {
+    background-image: url(../../images/weather/thunderstormSlightOrModerate.jpeg);
+  }
+  
+  .thunderstormWithSlightHail {
+    background-image: url(../../images/weather/thunderstormWithSlightHail.jpeg);
+  }
+  
+  .thunderstormWithHeavyHail {
+    background-image: url(../../images/weather/thunderstormWithHeavyHail.jpeg);
+  }
+  
