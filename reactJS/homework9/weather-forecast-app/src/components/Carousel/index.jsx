@@ -9,7 +9,7 @@ export default function Carousel({ hours, title }) {
       <div className='carousel'>
         <p className='title'>{title}</p>
         <div className='container'>
-          {hours.map((hour, i) => {
+          {hours.map((hour) => {
             const weatherCodeIndex = weatherCodes.findIndex(item => item.code === hour.code);
             const className = `wrapperWeather ${weatherCodes[weatherCodeIndex].image}`;
             const time = getHour(hour.time);
@@ -17,7 +17,7 @@ export default function Carousel({ hours, title }) {
             const describe = weatherCodes[weatherCodeIndex].describe;
             
             return (
-              <div key={String(i)} className='wrapperHour'>
+              <div key={hour.id} className='wrapperHour'>
                 <p className='time'>{time}</p>
                 <div className={className}>
                   <p className='temperature'>{temperature}</p>

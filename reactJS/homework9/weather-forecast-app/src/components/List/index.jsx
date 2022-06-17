@@ -5,6 +5,7 @@ import { weatherCodes } from '../../data/weather';
 import { getAllCurrentWeatherByCity } from '../../data/response';
 import { getTemperature } from '../../utils';
 import { STORAGE_NAME } from '../../consts';
+import { v1 as uuidv1 } from 'uuid';
 import './style.css';
 
 export default function List({ selectItem }) {
@@ -14,7 +15,7 @@ export default function List({ selectItem }) {
     const deleteItem = useCallback((city) => {
         const newList = items.filter(item => item !== city);
         localStorage.setItem(STORAGE_NAME, JSON.stringify(newList));
-        setItems(newList);
+        setItems(newList.map(item => ({...item, id: uuidv1() })));
     }, [items]);
 
     const prepareWeatherData = useCallback((data) => data.map(item => {
@@ -31,7 +32,8 @@ export default function List({ selectItem }) {
 
     useEffect(() => {
         if (items === null) {
-            setItems(getDataFromStorage(STORAGE_NAME));
+            const data = getDataFromStorage(STORAGE_NAME) || [];
+            setItems(data.map(item => ({ ...item, id: uuidv1() })));
         }
         
         if (items && items.length) {
@@ -44,8 +46,8 @@ export default function List({ selectItem }) {
     return (
         <section>
             <div className='list'>
-                {!!weather && items && items.map((item, i) => (
-                    <div className='item' key={String(i)} onClick={() => { selectItem(item) } }>
+                {!!weather && !!items && items.map((item) => (
+                    <div className='item' key={item.id} onClick={() => { selectItem(item) } }>
                         <ListItem
                             item={item}
                             weather={weather.find(weatherItem => weatherItem.city === item)}

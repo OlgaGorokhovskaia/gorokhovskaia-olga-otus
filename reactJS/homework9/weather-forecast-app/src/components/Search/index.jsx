@@ -57,7 +57,7 @@ export default function Search({ id, items, selectItem, placeholder, isDisabled 
                     {!!filteredItems.length &&  (
                         <ul>
                             {filteredItems.map((value, i) => (
-                                <li key={String(i)} onClick={(e) => {handleChangeSelect(e, value)}}>{value}</li>
+                                <li key={value.id} onClick={(e) => {handleChangeSelect(e, value)}}>{value}</li>
                             ))}
                         </ul>
                     )}

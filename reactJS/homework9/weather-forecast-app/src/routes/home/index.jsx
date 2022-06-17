@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { v1 as uuidv1 } from 'uuid';
 import { getCountriesDictionary } from '../../data/response';
 import Search from '../../components/Search';
 import List from '../../components/List';
@@ -28,7 +29,8 @@ export default function Home() {
 
   const getCitiesList = useCallback((dictionary) => {
     const item = dictionary.find((item) => item.country === country);
-    return item.cities.length ? item.cities : [item.country];
+    const citiesArr = item.cities.length ? item.cities : [item.country];
+    return citiesArr.map(city => ({ ...city, id: uuidv1() }));
   },[country]);
 
   const countries = useMemo(() => dictionary ? dictionary.map(item => item.country) : [], [dictionary]);

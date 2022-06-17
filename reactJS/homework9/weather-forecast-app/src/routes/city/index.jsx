@@ -1,6 +1,7 @@
 import React from 'react';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from 'react-router-dom';
 import { getCoordinatesByCity, getWeatherForcast, getDataFromStorage } from '../../data/response';
+import { v1 as uuidv1 } from 'uuid';
 import { getMonth, getDayOfWeek } from '../../utils';
 import { STORAGE_NAME } from '../../consts';
 import Carousel from '../../components/Carousel';
@@ -56,13 +57,14 @@ import './style.css';
       const data = [];
   
       for (let dayIndex = 0; dayIndex < numberOfDays; dayIndex++) {
-        const dataAboutOneDay = [];
+        const dataAboutOneDay = { id: uuidv1(), data: [] };
 
         for(let hourIndex = 0; hourIndex < numberOfHoursInOneDay; hourIndex++) {
           const { time, temperature_2m, weathercode } = weather.hourly;
           const index = (dayIndex * numberOfHoursInOneDay) + hourIndex;
           
-          dataAboutOneDay.push({
+          dataAboutOneDay.data.push({
+            id: uuidv1(),
             time: new Date(time[index]),
             temperature: temperature_2m[index],
             code: weathercode[index],
@@ -113,10 +115,10 @@ import './style.css';
             <div className='row'>
               <div className='column column-12'>
                 {weather.map((day, i) => {
-                  const date = getDate(day[0].time);
+                  const date = getDate(day.data[0].time);
                   const title = i === 0 ? `Today, ${date}` : date;
                   return (
-                      <Carousel key={`day_${i}`} hours={day} title={title}/>
+                      <Carousel key={day.id} hours={day.data} title={title}/>
                   )}
                 )}
               </div>
