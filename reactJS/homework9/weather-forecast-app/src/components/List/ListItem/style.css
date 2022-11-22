@@ -1,13 +1,12 @@
 .wrapper {
     height: 100%;
-    padding: 14px;
+    padding: 30px;
     background-color: rgba(181, 181, 181, 0.3);
     color: #fff;
     border-radius: 4px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    text-shadow: 2px 2px #444444;
 }
 
 .wrapper:hover {
@@ -16,30 +15,30 @@
 }
 
 .wrapper .box {
-    background: #5f82a073;
+    backdrop-filter: blur(4px);
     border-radius: 4px;
-    padding: 10px;
+    padding: 12px;
     height: 100%;
     position: relative;
 }
 
 .wrapper .cityName {
     margin: 0;
-    font-size: 24px;
+    font-size: 18px;
     line-height: 1;
     margin-bottom: 10px;
 }
 
 .wrapper .temperature {
     margin: 0 0 10px;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 1;
     margin-bottom: 10px;
 }
 
 .wrapper .describe {
     margin: 0;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1;
 }
 
@@ -47,13 +46,13 @@
     display: block;
     padding: 16px;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -26px;
+    right: -26px;
     z-index: 1;
     background-image: url(../../../images/icons/delete-white.svg);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 16px;
+    background-size: 14px;
 }
 
 

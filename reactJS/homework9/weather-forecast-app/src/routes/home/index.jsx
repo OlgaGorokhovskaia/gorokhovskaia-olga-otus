@@ -30,10 +30,11 @@ export default function Home() {
   const getCitiesList = useCallback((dictionary) => {
     const item = dictionary.find((item) => item.country === country);
     const citiesArr = item.cities.length ? item.cities : [item.country];
-    return citiesArr.map(city => ({ ...city, id: uuidv1() }));
+  
+    return citiesArr.map(city => ({ value: city, id: uuidv1() }));
   },[country]);
 
-  const countries = useMemo(() => dictionary ? dictionary.map(item => item.country) : [], [dictionary]);
+  const countries = useMemo(() => dictionary ? dictionary.map(item => ({ value: item.country, id: uuidv1() })) : [], [dictionary]);
   const cities = useMemo(() => country ? getCitiesList(dictionary || []) : [], [country, getCitiesList, dictionary]);
 
   return (

@@ -37,7 +37,7 @@ export default function Search({ id, items, selectItem, placeholder, isDisabled 
         selectItem('');
     };
 
-    const filteredItems = searchField ? items.filter((item) => item.toLowerCase().includes(searchField.toLowerCase())) : items;
+    const filteredItems = searchField ? items.filter((item) => item.value.toLowerCase().includes(searchField.toLowerCase())) : items;
     
     return (
         <div id={id} className='search'>
@@ -56,8 +56,8 @@ export default function Search({ id, items, selectItem, placeholder, isDisabled 
                 <Scroll>
                     {!!filteredItems.length &&  (
                         <ul>
-                            {filteredItems.map((value, i) => (
-                                <li key={value.id} onClick={(e) => {handleChangeSelect(e, value)}}>{value}</li>
+                            {filteredItems.map((item) => (
+                                <li key={item.id} onClick={(e) => {handleChangeSelect(e, item.value)}}>{item.value}</li>
                             ))}
                         </ul>
                     )}
