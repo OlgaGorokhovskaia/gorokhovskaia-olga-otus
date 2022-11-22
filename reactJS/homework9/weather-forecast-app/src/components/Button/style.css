@@ -2,6 +2,13 @@
   --size: 16px;
 }
 
+
+@media only screen and (max-width: 550px) {
+  :root {
+    --size: 12px;
+  }
+}
+
 .btn {
     background: none;
     border: none;
@@ -17,6 +24,7 @@
   
   .addBtn, .backBtn {
     position: relative;
+    padding: 0;
     padding-left: calc(var(--size) + 4px);
   }
   

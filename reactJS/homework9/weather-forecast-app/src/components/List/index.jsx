@@ -13,9 +13,9 @@ export default function List({ selectItem }) {
     const [weather, setWeather] = useState(null);
 
     const deleteItem = useCallback((city) => {
-        const newList = items.filter(item => item !== city);
-        localStorage.setItem(STORAGE_NAME, JSON.stringify(newList));
-        setItems(newList.map(item => ({...item, id: uuidv1() })));
+        const newList = items.filter(item => item.value !== city);
+        localStorage.setItem(STORAGE_NAME, JSON.stringify(newList.map(item => item.value)));
+        setItems(newList);
     }, [items]);
 
     const prepareWeatherData = useCallback((data) => data.map(item => {
@@ -33,11 +33,12 @@ export default function List({ selectItem }) {
     useEffect(() => {
         if (items === null) {
             const data = getDataFromStorage(STORAGE_NAME) || [];
-            setItems(data.map(item => ({ ...item, id: uuidv1() })));
+            const newItems = data.map(item => ({ value: item, id: uuidv1() }));
+            setItems(newItems);
         }
         
         if (items && items.length) {
-            getAllCurrentWeatherByCity(items)
+            getAllCurrentWeatherByCity(items.map(item => item.value))
                 .then(res => setWeather(prepareWeatherData(res || [])))
           
         }
@@ -47,10 +48,10 @@ export default function List({ selectItem }) {
         <section>
             <div className='list'>
                 {!!weather && !!items && items.map((item) => (
-                    <div className='item' key={item.id} onClick={() => { selectItem(item) } }>
+                    <div className='item' key={item.id} onClick={() => { selectItem(item.value) } }>
                         <ListItem
-                            item={item}
-                            weather={weather.find(weatherItem => weatherItem.city === item)}
+                            item={item.value}
+                            weather={weather.find(weatherItem => weatherItem.city === item.value)}
                             deleteItem={deleteItem}
                         />
                     </div>

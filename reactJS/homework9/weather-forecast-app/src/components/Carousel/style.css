@@ -1,13 +1,9 @@
-:root {
-  --text-shadow: 2px 0px #444444;;
-}
-
 .carousel {
     margin-bottom: 40px;
 }
 
 .carousel .title {
-    font-size: 24px;
+    font-size: 16px;
     margin: 0 0 10px;
 }
   
@@ -58,21 +54,24 @@
   
  .wrapperHour .time {
     font-size: 14px;
-    margin: 0 0 10px;
+    margin: 0 0 4px;
+  }
+
+  .wrapperInfo {
+    backdrop-filter: blur(16px);
   }
   
   .wrapperWeather .temperature {
-    font-size: 24px;
-    margin: 0 0 4px;
-    text-shadow: var(--text-shadow);
+    font-size: 22px;
+    margin: 0;
+    padding: 4px 0;
   }
   
   .wrapperWeather .describe {
-    font-size: 16px;
+    font-size: 14px;
     margin: 0;
-    padding: 10px 0;
+    padding: 4px;
     background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
-    text-shadow: var(--text-shadow);
   }
 
 .clearSky {

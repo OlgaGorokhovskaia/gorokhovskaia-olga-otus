@@ -16,10 +16,10 @@ export default function ListItem({ item, deleteItem, weather }) {
             <div className='box'>
                 <i className='deleteIcon' onClick={handleClickIcon}></i>
                 <div className='row'>
-                    <div className='column column-6'>
+                    <div className='column column-8'>
                         <p className='cityName'>{item}</p>
                     </div>
-                    <div className='column column-6'>
+                    <div className='column column-4'>
                         <p className='temperature'>{temperature}</p>
                     </div>
                 </div> 

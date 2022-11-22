@@ -20,8 +20,10 @@ export default function Carousel({ hours, title }) {
               <div key={hour.id} className='wrapperHour'>
                 <p className='time'>{time}</p>
                 <div className={className}>
-                  <p className='temperature'>{temperature}</p>
-                  <p className='describe'>{describe}</p>
+                  <div className="wrapperInfo">
+                    <p className='temperature'>{temperature}</p>
+                    <p className='describe'>{describe}</p>
+                  </div>
                 </div>
               </div>
             );
