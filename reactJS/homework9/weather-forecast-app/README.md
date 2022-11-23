@@ -1,7 +1,10 @@
 # Weather forecast app
 
-![Front-End Developer](./public/screenshot.jpg)
+## Home page
+![Front-End Developer](./public/screenshot-1.png)
 
+## 7-day weather forecast for a city
+![Front-End Developer](./public/screenshot-2.png)
 
 This application uses the next APIs :
 
