@@ -14,7 +14,8 @@ export default function List({ selectItem }) {
 
     const deleteItem = useCallback((city) => {
         const newList = items.filter(item => item.value !== city);
-        localStorage.setItem(STORAGE_NAME, JSON.stringify(newList.map(item => item.value)));
+        const cities = newList.map(item => item.value);
+        localStorage.setItem(STORAGE_NAME, JSON.stringify(cities));
         setItems(newList);
     }, [items]);
 
